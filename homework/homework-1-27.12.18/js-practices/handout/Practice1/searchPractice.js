@@ -1,9 +1,9 @@
 'use strict'
 
 
-function binarySearch(sortedArray, first, second, value) {
-    var left = first,
-        right = second;
+function binarySearch(sortedArray, firstIndex, secondIndex, value) {
+    var left = firstIndex,
+        right = secondIndex;
     while (left <= right) {
         var mid = (left + right) >> 1;
         if (sortedArray[mid] == value)

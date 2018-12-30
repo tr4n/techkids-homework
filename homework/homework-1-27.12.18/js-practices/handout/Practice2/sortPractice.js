@@ -27,12 +27,7 @@ function quickSort(array, first, second) {
 
 function sort(input) {
     quickSort(input, 0, input.length - 1);
-    quickSort(input, 0, input.length - 1);
-    quickSort(input, 0, input.length - 1);
-    quickSort(input, 0, input.length - 1);
-    quickSort(input, 0, input.length - 1);
-    quickSort(input, 0, input.length - 1);
-    quickSort(input, 0, input.length - 1);
+
     return input;
 }
 
