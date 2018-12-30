@@ -42,57 +42,58 @@ function mergeSort(input) {
 
 
 
-function radixSort(array) {
-    function sort(nth) {
-        var i, j, k;
-        var nextRadix = false;
-        const currentPlaceValue = 10 ** nth;
-        const nextPlaceValue = 10 ** (nth + 1);
-        const buckets = [
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            []
-        ];
-        i = 0;
-        for (j = 0; j < array.length; j++) {
-            var val = array[j];
-            var uVal = Math.abs(val)
-            if (uVal >= nextPlaceValue) { nextRadix = true }
-            const digit = Math.floor(uVal / currentPlaceValue) % 10;
-            if (val >= 0) { buckets[digit + 10].push(val) } else { buckets[10 - digit].push(val) }
-        }
-        for (j = 0; j < buckets.length; j++) {
-            const bucket = buckets[j];
-            for (k = 0; k < bucket.length; k++) { array[i++] = bucket[k] }
-        }
-        return nextRadix;
-    }
-    var radix = 0;
-    if (array.length > 1) {
-        while (sort(radix++));
-    }
-    return array;
-}
+
 
 function sort(input) {
+    function radixSort(array) {
+        function sort(nth) {
+            var i, j, k;
+            var nextRadix = false;
+            const currentPlaceValue = 10 ** nth;
+            const nextPlaceValue = 10 ** (nth + 1);
+            const buckets = [
+                [],
+                [],
+                [],
+                [],
+                [],
+                [],
+                [],
+                [],
+                [],
+                [],
+                [],
+                [],
+                [],
+                [],
+                [],
+                [],
+                [],
+                [],
+                [],
+                [],
+                []
+            ];
+            i = 0;
+            for (j = 0; j < array.length; j++) {
+                var val = array[j];
+                var uVal = Math.abs(val)
+                if (uVal >= nextPlaceValue) { nextRadix = true }
+                const digit = Math.floor(uVal / currentPlaceValue) % 10;
+                if (val >= 0) { buckets[digit + 10].push(val) } else { buckets[10 - digit].push(val) }
+            }
+            for (j = 0; j < buckets.length; j++) {
+                const bucket = buckets[j];
+                for (k = 0; k < bucket.length; k++) { array[i++] = bucket[k] }
+            }
+            return nextRadix;
+        }
+        var radix = 0;
+        if (array.length > 1) {
+            while (sort(radix++));
+        }
+        return array;
+    };
     return radixSort(input);
 }
 
