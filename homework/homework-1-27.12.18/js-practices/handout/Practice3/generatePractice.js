@@ -36,30 +36,18 @@ var ObjectGenerator = {
     FIRST_INDEX: 1,
     LAST_INDEX: 2,
     MIDDLE_INDEX: 3,
-    MAX_VALUE: 19981,
+    MAX_VALUE: 10000,
 
-    binarySearch(sortedArray, firstIndex, secondIndex, value) {
-        var left = firstIndex,
-            right = secondIndex;
-        while (left <= right) {
-            var mid = (left + right) >> 1;
-            if (sortedArray[mid] == value)
-                return mid;
-            if (value < sortedArray[mid])
-                right = mid - 1;
-            else
-                left = mid + 1;
-
-        }
-        return -1;
-    },
-
-    createArray(length, maxValue, unsign) {
+    createArray(length, maxValue) {
         var array = [];
+        var value = -maxValue;
+        var delta = parseInt((maxValue << 1) / length);
         while (length-- > 0) {
-            array.push(parseInt(2 * maxValue * Math.random()) - maxValue);
+            value += parseInt(delta * Math.random() + 1);
+            array.push(value);
         }
-        return array.sort((first, second) => (first - second));
+        return array;
+
     },
 
     generateMode() {
@@ -68,10 +56,10 @@ var ObjectGenerator = {
     },
 
     generateObject(length, mode) {
-        var input = this.createArray(length, this.MAX_VALUE, false);
+        var input = this.createArray(length, this.MAX_VALUE);
         var target = this.MAX_VALUE,
             output = this.NOT_FOUND;
-        input.sort();
+
         switch (mode) {
             case this.NOT_FOUND:
                 target = this.MAX_VALUE + parseInt(Math.random() * 10 + 2);
@@ -80,17 +68,17 @@ var ObjectGenerator = {
             case this.FIRST_INDEX:
                 target = input[0];
                 output = 0;
-                output = input.indexOf(target);
+                //  output = input.indexOf(target);
                 break;
             case this.LAST_INDEX:
                 output = length - 1;
                 target = input[length - 1];
-                output = input.indexOf(target);
+                //   output = input.indexOf(target);
                 break;
             case this.MIDDLE_INDEX:
                 output = length > 2 ? 1 + parseInt(Math.random() * (length - 2)) : 0;
                 target = input[output];
-                output = input.indexOf(target);
+                //   output = input.indexOf(target);
                 break;
         }
         return {
