@@ -1,5 +1,36 @@
 'use strict'
 
+
+var Sort = {
+    mergeSort(input) {
+        var length = input.length;
+        if (length < 2)
+            return input;
+        var mid = Math.floor(length >> 1),
+            firstArray = input.slice(0, mid),
+            secondArray = input.slice(mid);
+        return merge(mergeSort(firstArray), mergeSort(secondArray));
+    },
+
+    merge(firstArray, secondArray) {
+        var result = [],
+            firstLength = firstArray.length,
+            secondLength = secondArray.length,
+            left = 0,
+            right = 0;
+        while (left < firstLength && right < secondLength) {
+            if (firstArray[left] < secondArray[right]) {
+                result.push(firstArray[left++]);
+            } else {
+                result.push(secondArray[right++]);
+            }
+        }
+        return result.concat(firstArray.slice(left)).concat(secondArray.slice(right));
+    }
+}
+
+
+
 var ObjectGenerator = {
     NOT_FOUND: -1,
     FIRST_INDEX: 1,
@@ -7,12 +38,28 @@ var ObjectGenerator = {
     MIDDLE_INDEX: 3,
     MAX_VALUE: 19981,
 
+    binarySearch(sortedArray, firstIndex, secondIndex, value) {
+        var left = firstIndex,
+            right = secondIndex;
+        while (left <= right) {
+            var mid = (left + right) >> 1;
+            if (sortedArray[mid] == value)
+                return mid;
+            if (value < sortedArray[mid])
+                right = mid - 1;
+            else
+                left = mid + 1;
+
+        }
+        return -1;
+    },
+
     createArray(length, maxValue, unsign) {
         var array = [];
         while (length-- > 0) {
             array.push(parseInt(2 * maxValue * Math.random()) - maxValue);
         }
-        return array;
+        return array.sort((first, second) => (first - second));
     },
 
     generateMode() {
@@ -55,19 +102,19 @@ var ObjectGenerator = {
     generateObjectArray(testLengthArray) {
         var generatedArray = [];
 
-        if (testLengthArray.length >= 4) {
-            generatedArray.push(ObjectGenerator.generateObject(testLengthArray[0], this.NOT_FOUND));
-            generatedArray.push(ObjectGenerator.generateObject(testLengthArray[1], this.FIRST_INDEX));
-            generatedArray.push(ObjectGenerator.generateObject(testLengthArray[2], this.LAST_INDEX));
-            generatedArray.push(ObjectGenerator.generateObject(testLengthArray[3], this.MIDDLE_INDEX));
+        if (testLengthArray.length > 3) {
+            generatedArray.push(this.generateObject(testLengthArray[0], this.NOT_FOUND));
+            generatedArray.push(this.generateObject(testLengthArray[1], this.FIRST_INDEX));
+            generatedArray.push(this.generateObject(testLengthArray[2], this.LAST_INDEX));
+            generatedArray.push(this.generateObject(testLengthArray[3], this.MIDDLE_INDEX));
 
             for (var index = 4; index < testLengthArray.length; index++) {
-                generatedArray.push(ObjectGenerator.generateObject(testLengthArray[index], ObjectGenerator.generateMode()));
+                generatedArray.push(this.generateObject(testLengthArray[index], this.generateMode()));
             }
 
         } else {
             testLengthArray.forEach(element => {
-                generatedArray.push(ObjectGenerator.createArray(element, ObjectGenerator.generateMode()));
+                generatedArray.push(this.createArray(element, this.generateMode()));
             });
 
         }
