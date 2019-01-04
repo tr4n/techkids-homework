@@ -1,0 +1,35 @@
+img {
+    width: 235px;
+    height: 314px;
+}
+
+table {
+    margin-top: 20px;
+    margin-left: 0;
+    margin-right: 0;
+    width: calc(100% - 200px);
+}
+
+table,th,td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: left;
+    line-height: 25px;
+    padding: 0 5px 0 5px; 
+   
+
+
+}
+
+table #profile-picture {
+    width: 280px;
+    height: 320px;
+    text-align: center;
+}
+table .during-time{
+    padding-left: 25px; 
+}
+
+table .label {
+
+}
