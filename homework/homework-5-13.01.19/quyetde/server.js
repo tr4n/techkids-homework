@@ -55,19 +55,9 @@ app.get("/", (request, response) => {
 // see result vote
 app.get("/result/:questionId", (request, response) => {
     const questions = getQuestions(),
-        questionId = request.params.questionId;
-
-    
-    let question;
-    questions.every((item) => {
-        if (item.id == questionId) {
-            question = item;
-            return false;
-        }
-        return true;
-    });
-
-    const yesVote = question.yes,
+        questionId = request.params.questionId,
+        question = questions.filter(element => (element.id == questionId))[0],
+        yesVote = question.yes,
         noVote = question.no,
         yesPercent = Number(Number((yesVote * 100) / (yesVote + noVote)).toFixed(2)),
         noPercent = 100 - yesPercent;
