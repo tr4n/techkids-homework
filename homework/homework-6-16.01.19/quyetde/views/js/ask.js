@@ -3,7 +3,25 @@ $(document).ready(() => {
     $('.submit-button').hover(() => {
         $('.submit-button').addClass('hover');
     });
-    $('#question').val("hello world");
+
+    $('.submit-button').on('click', () => {
+        const content = $('textarea').val();
+        console.log("textarea: " + content);
+        $.ajax({
+            url: '/add-question',           
+            type: 'POST',        
+            data: {"content" : content},
+            success: function (data, textStatus, jQxhr) {
+                console.log("add success");
+                $('.add-success').text("Add question success!");
+                $('.add-success').show(1).delay(1000).hide(1);
+            }
+            
+        });
+    });
+
+
+
 
     $('.questions-button').on('click', () => {
         console.log("testd");

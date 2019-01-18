@@ -13,13 +13,15 @@
 <body>
     <h1>Add a question</h1>
     <!-- http://localhost:1234/add-question -->
-    <form action="/add-question" method="POST">
-        <textarea name="questionContent" id="question" cols="30" rows="10" maxlength="200"></textarea>
-        <p>Characters left: 200/200</p>
-        <button class='submit-button' type="submit"> Send </button>
-    </form>
+
+    <textarea name="question-content" id="question" cols="30" rows="10" maxlength="200"></textarea>
+    <p>Characters left: 200/200</p>
+    <button class='submit-button' type="submit"> Send </button>
+
     <button class="questions-button">See total questions</button>
     <div class="total-questions"></div>
+
+    <div class ="add-success"></div> 
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>

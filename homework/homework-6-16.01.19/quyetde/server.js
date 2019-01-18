@@ -37,15 +37,16 @@ let getQuestions = function () {
 // homepage: see questions
 app.get("/", (request, response) => {
     response.sendFile(__dirname + "/views/answer.html");
-   
+    const questions = getQuestions();
+   if(questions.length == 0){
+       response.send("Question Box is empty");
+   }
 
 });
 
 app.get("/get-question", (request, response) => {
     const questions = getQuestions();
-    if (questions.lenth == 0) {
-        response.send("Question list is empty");
-    } else {
+    if (questions.length > 0) {
         const randomQuestion = questions[Random.nextInt(questions.length)];
         response.status(200).send({
             question: randomQuestion
@@ -100,7 +101,8 @@ app.get("/ask", (request, response) => {
 // add-question
 app.post("/add-question", (request, response) => {
 
-    const questionContent = request.body.questionContent;
+    console.log("receive", request.body);
+    const questionContent = request.body["content"];
     if (questionContent.toString().length < 1) return;
     let questions = getQuestions();
     let newQuestion = {
@@ -112,7 +114,8 @@ app.post("/add-question", (request, response) => {
 
     questions.push(newQuestion);
     fs.writeFileSync("views/database.json", JSON.stringify(questions));
-    response.redirect("/");
+    response.status(200).send({});
+  //  response.redirect("/");
 });
 
 //get total questions
