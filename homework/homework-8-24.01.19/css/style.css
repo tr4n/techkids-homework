@@ -1,0 +1,55 @@
+body{
+    background-color: rgba(145, 142, 142, 0);
+    
+}
+header.masthead {
+
+    background: #343a40 url(../images/bg-masthead.jpg) no-repeat center center;
+    background-size: cover;
+    padding-top: 10rem;
+    padding-bottom: 10rem;
+}
+
+header.masthead .overlay {
+    position: obsolute;
+    background-color: #000;
+    opacity: 0.5;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+}
+
+section.feature-icons {
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+}
+
+section.feature-icons {
+    
+}
+
+section.showcase{
+    z-index: 5;
+}
+
+section.showcase .showcase-text {
+    margin: 20% 25% 20% 25%;
+    background-color: #ffffff;
+}
+
+section.showcase .showcase-img[showcase="1"] {
+    background: url(../images/bg-showcase-1.jpg) no-repeat left top;
+    background-size: cover;
+}
+
+section.showcase .showcase-img[showcase="2"] {
+    background: url(../images/bg-showcase-2.jpg) no-repeat left top;
+    background-size: cover;
+}
+
+section.showcase .showcase-img[showcase="3"] {
+    background: url(../images/bg-showcase-3.jpg) no-repeat left top;
+    background-size: cover;
+}
